@@ -33,7 +33,7 @@
             this.text2 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.logOut = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // start
@@ -85,13 +85,15 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "TEXT 2";
             // 
-            // textBox1
+            // logOut
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(156, 297);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(163, 20);
-            this.textBox1.TabIndex = 5;
+            this.logOut.BackColor = System.Drawing.Color.White;
+            this.logOut.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.logOut.Location = new System.Drawing.Point(114, 277);
+            this.logOut.Name = "logOut";
+            this.logOut.Size = new System.Drawing.Size(255, 96);
+            this.logOut.TabIndex = 5;
+            this.logOut.Text = "";
             // 
             // Form1
             // 
@@ -99,7 +101,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.logOut);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.text2);
@@ -119,7 +121,7 @@
         private System.Windows.Forms.RichTextBox text2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox logOut;
     }
 }
 

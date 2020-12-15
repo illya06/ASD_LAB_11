@@ -8,32 +8,41 @@ namespace ASD_LAB_11
 {
     class KMP
     {
-        public static void KMPSearch(string pat, string txt)
+        public static string KMPSearch(string pat, string txt)
         {
-            int M = pat.Length;
-            int N = txt.Length;
+            string log = "";
 
-            int[] lps = new int[M];
+            int[] lps = new int[pat.Length];
             int j = 0;
 
-            computeLPSArray(pat, M, lps);
+            computeLPSArray(pat, pat.Length, lps);
+            log += $"\nKey word : {pat}";
+            log += "\nLSP ARRAY : \n";
+            foreach(int d in lps)
+            {
+                log += $" {d} ";
+            }
+            log += "\n";
+            foreach (char ch in pat)
+            {
+                log += $" {ch} ";
+            }
 
             int i = 0;
-            while (i < N)
+            while (i < txt.Length)
             {
                 if (pat[j] == txt[i])
                 {
                     j++;
                     i++;
                 }
-                if (j == M)
+
+                if (j == pat.Length)
                 {
-                    Console.Write("Found pattern "
-                                  + "at index " + (i - j));
+                    log += $"\n At ({i - j}) : Entry of {pat}";
                     j = lps[j - 1];
                 }
-
-                else if (i < N && pat[j] != txt[i])
+                else if (i < txt.Length && pat[j] != txt[i])
                 {
                     if (j != 0)
                         j = lps[j - 1];
@@ -41,6 +50,8 @@ namespace ASD_LAB_11
                         i = i + 1;
                 }
             }
+
+            return log;
         }
 
         public static void computeLPSArray(string pat, int M, int[] lps)
