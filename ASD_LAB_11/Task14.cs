@@ -9,6 +9,7 @@ namespace ASD_LAB_11
 {
     class Task14
     {
+        //return string[] : 0 - text | 1 - key word
         public static string[] search(string text)
         {
             string[] result = new string[2];
@@ -33,8 +34,11 @@ namespace ASD_LAB_11
             foreach (KeyValuePair<string, int> kvp in map)
                 if (kvp.Value == max)
                     keyWord = kvp.Key;
+
             if (keyWord != "")
-                Regex.Replace(editedText, $"\\b{keyWord}\\b", "");
+                editedText = Regex.Replace(editedText, $"\\b{keyWord}\\b", "");
+
+            editedText = editedText.Replace("  ", " ");
 
             result[0] = editedText;
             result[1] = keyWord;
