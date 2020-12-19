@@ -39,7 +39,7 @@
             // start
             // 
             this.start.BackColor = System.Drawing.Color.White;
-            this.start.Location = new System.Drawing.Point(204, 234);
+            this.start.Location = new System.Drawing.Point(253, 83);
             this.start.Name = "start";
             this.start.Size = new System.Drawing.Size(75, 23);
             this.start.TabIndex = 0;
@@ -51,9 +51,9 @@
             // 
             this.text1.BackColor = System.Drawing.Color.White;
             this.text1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.text1.Location = new System.Drawing.Point(114, 104);
+            this.text1.Location = new System.Drawing.Point(165, 86);
             this.text1.Name = "text1";
-            this.text1.Size = new System.Drawing.Size(100, 96);
+            this.text1.Size = new System.Drawing.Size(70, 18);
             this.text1.TabIndex = 1;
             this.text1.Text = "";
             // 
@@ -61,37 +61,37 @@
             // 
             this.text2.BackColor = System.Drawing.Color.White;
             this.text2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.text2.Location = new System.Drawing.Point(269, 104);
+            this.text2.Location = new System.Drawing.Point(165, 130);
             this.text2.Name = "text2";
-            this.text2.Size = new System.Drawing.Size(100, 96);
+            this.text2.Size = new System.Drawing.Size(163, 61);
             this.text2.TabIndex = 2;
             this.text2.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(142, 88);
+            this.label1.Location = new System.Drawing.Point(111, 88);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "TEXT 1";
+            this.label1.Text = "Pattern : ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(294, 88);
+            this.label2.Location = new System.Drawing.Point(111, 130);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.Size = new System.Drawing.Size(37, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "TEXT 2";
+            this.label2.Text = "Text : ";
             // 
             // logOut
             // 
             this.logOut.BackColor = System.Drawing.Color.White;
             this.logOut.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.logOut.Location = new System.Drawing.Point(114, 277);
+            this.logOut.Location = new System.Drawing.Point(114, 209);
             this.logOut.Name = "logOut";
-            this.logOut.Size = new System.Drawing.Size(255, 96);
+            this.logOut.Size = new System.Drawing.Size(214, 96);
             this.logOut.TabIndex = 5;
             this.logOut.Text = "";
             // 
