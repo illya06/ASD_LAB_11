@@ -8,8 +8,9 @@ namespace ASD_LAB_11
 {
     class KMP_L
     {
-        public static int find(string text, string pat)
+        public static string find(string text, string pat)
         {
+            string log = "";
             int i, j, N, M;
 
             N = text.Length;
@@ -44,10 +45,10 @@ namespace ASD_LAB_11
                 }
                 if (j == M)
                 {
-                    return i - j + 1;
+                    log += $"\n At ({i - j + 1}) : Entry of {pat}";
                 }
             }
-            return -1;
+            return log;
         }
     }
 }
