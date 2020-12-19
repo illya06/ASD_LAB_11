@@ -17,7 +17,7 @@ namespace ASD_LAB_11
             InitializeComponent();
         }
 
-        private void start_Click(object sender, EventArgs e)
+        private async void start_Click(object sender, EventArgs e)
         {
             //string[] param = Task14.search(text1.Text);
             //text1.Text = param[0];
