@@ -21,7 +21,7 @@ namespace ASD_LAB_11
         {
             //string[] param = Task14.search(text1.Text);
             //text1.Text = param[0];
-            logOut.Text = KMP_L.find(text1.Text, text2.Text);
+            logOut.Text += $"{KMP_L.find(text1.Text, text2.Text)}";
         }
     }
 }
