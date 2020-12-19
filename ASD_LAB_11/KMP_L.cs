@@ -8,6 +8,46 @@ namespace ASD_LAB_11
 {
     class KMP_L
     {
+        public static int computeLPSArray(string pat, int[] lps)
+        {
+            int len = 0;
+            int i = 1;
+            lps[0] = 0;
+
+            while (i < pat.Length)
+            {
+                if (pat[i] == pat[len])
+                {
+                    len++;
+                    lps[i] = len;
+                    i++;
+                }
+                else
+                {
+                    if (len != 0)
+                    {
+                        len = lps[len - 1];
+                    }
+                    else
+                    {
+                        lps[i] = len;
+                        i++;
+                    }
+                }
+            }
+
+            //return
+            #region return value calculation
+            int ret = 0;
+            foreach (int el in lps)
+            {
+                if (el != 0)
+                    ret = 1;
+            }
+            #endregion
+            return ret;
+        }
+
         public static int find(string text, string pat)
         {
             int i, j, N, M;
@@ -16,20 +56,7 @@ namespace ASD_LAB_11
             M = pat.Length;
             int[] d = new int[M];
 
-            d[0] = 0;
-
-            for (i = 0, j = 0; i < M; i++)
-            {
-                while (j > 0 && pat[j] != pat[i])
-                {
-                    j = d[j - 1];
-                }
-                if (pat[j] == pat[i])
-                {
-                    j++;
-                }
-                d[i] = j;
-            }
+            computeLPSArray(pat, d);
 
             //search
             i = 0; j = 0;
