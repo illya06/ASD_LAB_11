@@ -15,7 +15,17 @@ namespace ASD_LAB_11
             int[] lps = new int[pat.Length];
             int j = 0;
 
-            computeLPSArray(pat, pat.Length, lps);
+            int resCheck = computeLPSArray(pat, lps);
+            //check
+            #region Return value check
+            if (resCheck == 0)
+            {
+                log += "\nLPS array has no sufixes\n";
+            }
+            #endregion
+
+            //log
+            #region log for lsp and keyword
             log += $"\nKey word : {pat}";
             log += "\nLSP ARRAY : \n";
             foreach(int d in lps)
@@ -27,6 +37,7 @@ namespace ASD_LAB_11
             {
                 log += $" {ch} ";
             }
+            #endregion
 
             int i = 0;
             while (i < txt.Length)
@@ -54,13 +65,13 @@ namespace ASD_LAB_11
             return log;
         }
 
-        public static void computeLPSArray(string pat, int M, int[] lps)
+        public static int computeLPSArray(string pat, int[] lps)
         {
             int len = 0;
             int i = 1;
             lps[0] = 0;
 
-            while (i < M)
+            while (i < pat.Length)
             {
                 if (pat[i] == pat[len])
                 {
@@ -81,6 +92,17 @@ namespace ASD_LAB_11
                     }
                 }
             }
+
+            //return
+            #region return value calculation
+            int ret = 0;
+            foreach(int el in lps)
+            {
+                if (el != 0)
+                    ret = 1;
+            }
+            #endregion
+            return ret;
         }
     }
 }
