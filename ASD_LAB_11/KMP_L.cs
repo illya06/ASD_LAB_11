@@ -56,6 +56,21 @@ namespace ASD_LAB_11
             M = pat.Length;
             int[] d = new int[M];
 
+            /*d[0] = 0;
+
+            for (i = 0, j = 0; i < M; i++)
+            {
+                while (j > 0 && pat[j] != pat[i])
+                {
+                    j = d[j - 1];
+                }
+                if (pat[j] == pat[i])
+                {
+                    j++;
+                }
+                d[i] = j;
+            }*/
+
             computeLPSArray(pat, d);
 
             //search
