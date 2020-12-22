@@ -79,7 +79,7 @@ namespace ASD_LAB_11
             {
                 while (j > 0 && pat[j] != text[i])
                 {
-                    i = i + j - d[j - 1] - 1;
+                    i = i + j - d[j];
                 }
                 if (pat[j] == text[i])
                 {
