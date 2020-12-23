@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,47 +9,92 @@ namespace ASD_LAB_11
 {
     class KMP_L
     {
-        public static int find(string text, string pat)
+
+        public static int prefixFunction(string pat, int[] pref)
         {
-            int i, j, N, M;
+            int sz = pat.Length;
 
-            N = text.Length;
-            M = pat.Length;
-            int[] d = new int[M];
-
-            d[0] = 0;
-
-            for(i = 0, j = 0; i < M; i++)
+            for (int i = 1; i < sz; ++i)
             {
-                while(j>0 && pat[j] != pat[i])
+                int j = pref[i - 1];
+                while (j > 0 && pat[i] != pat[j])
                 {
-                    j = d[j - 1];
+                    j = pref[j - 1];
                 }
-                if(pat[j] == pat[i])
+                if (pat[i] == pat[j])
                 {
-                    j++;
+                    ++j;
                 }
-                d[i] = j;
+                pref[i] = j;
             }
 
-            //search
-            i = 0; j = 0;
-            while (i < N - j)
+            foreach (int i in pref)
             {
-                while (j > 0 && pat[j] != text[i])
+                if (i != 0)
+                    return 1;
+            }
+
+            return 0;
+        }
+
+        public static string search(string pat, string txt)
+        {
+            string log = "";
+            int[] pref = new int[pat.Length];
+            int resCheck = prefixFunction(pat, pref);
+
+            #region Return value check
+            if (resCheck == 0)
+            {
+                log += "\nLPS array has no sufixes\n";
+            }
+            else
+            {
+                log += "\nLSP Array : \n";
+                foreach (char ch in pat)
                 {
-                    i = i + j - d[j - 1] - 1;
+                    log += $" ({ch}) ";
                 }
-                if (pat[j] == text[i])
+                log += "\n";
+                foreach (int k in pref)
                 {
-                    j++;
+                    log += $" ({k}) ";
                 }
+            }
+            #endregion
+
+            string logRes = "";
+
+            int M = pat.Length;
+            int N = txt.Length;
+
+            int i = 0, j = 0;
+            while (i < N)
+            {
                 if (j == M)
                 {
-                    return i - j + 1;
+                    logRes += $"\nEntrance of ({pat}) at position ({i})";
+                    i += j;
+                    j = 0;
+                    if (i == N)
+                        break;
+                }
+                if (j > 0 && pat[j] != txt[i + j])
+                {
+                    i += j - pref[j];
+                    j = 0;
+                }
+                if (pat[j] == txt[i + j])
+                {
+                    j++;
+                }
+                else
+                {
+                    i++;
                 }
             }
-            return -1;
+
+            return log + logRes;
         }
     }
 }
