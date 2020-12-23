@@ -8,89 +8,69 @@ namespace ASD_LAB_11
 {
     class KMP_L
     {
-        public static int computeLPSArray(string pat, int[] lps)
-        {
-            int len = 0;
-            int i = 1;
-            lps[0] = 0;
 
-            while (i < pat.Length)
+        public static int[] prefixFunction(string pattern)
+        {
+            int sz = pattern.Length;
+            int[] prefix = new int[sz];
+
+            for (int i = 1; i < sz; ++i)
             {
-                if (pat[i] == pat[len])
+                int j = prefix[i - 1];
+                while (j > 0 && pattern[i] != pattern[j])
                 {
-                    len++;
-                    lps[i] = len;
-                    i++;
+                    j = prefix[j - 1];
+                }
+                if (pattern[i] == pattern[j])
+                {
+                    ++j;
+                }
+                prefix[i] = j;
+            }
+
+            return prefix;
+        }
+
+        public static int KMPsearch(string pattern, string text)
+        {
+            int[] prefix = prefixFunction(pattern);
+
+            int M = pattern.Length;
+            int N = text.Length;
+
+            int i = 0, j = 0;
+            while (i < N)
+            {
+                if (j > 0 && pattern[j] != text[i + j])
+                {
+                    i += j - prefix[j];
+                    j = 0;
+                }
+                if (pattern[j] == text[i + j])
+                {
+                    j++;
                 }
                 else
                 {
-                    if (len != 0)
-                    {
-                        len = lps[len - 1];
-                    }
-                    else
-                    {
-                        lps[i] = len;
-                        i++;
-                    }
-                }
-            }
-
-            //return
-            #region return value calculation
-            int ret = 0;
-            foreach (int el in lps)
-            {
-                if (el != 0)
-                    ret = 1;
-            }
-            #endregion
-            return ret;
-        }
-
-        public static int find(string text, string pat)
-        {
-            int i, j, N, M;
-
-            N = text.Length;
-            M = pat.Length;
-            int[] d = new int[M];
-
-            /*d[0] = 0;
-
-            for (i = 0, j = 0; i < M; i++)
-            {
-                while (j > 0 && pat[j] != pat[i])
-                {
-                    j = d[j - 1];
-                }
-                if (pat[j] == pat[i])
-                {
-                    j++;
-                }
-                d[i] = j;
-            }*/
-
-            computeLPSArray(pat, d);
-
-            //search
-            i = 0; j = 0;
-            while (i < N - j)
-            {
-                while (j > 0 && pat[j] != text[i])
-                {
-                    i = i + j - d[j];
-                }
-                if (pat[j] == text[i])
-                {
-                    j++;
+                    i++;
                 }
                 if (j == M)
                 {
-                    return i - j + 1;
+                    return i;
                 }
             }
+
             return -1;
+        }
+
+        public static string search(string pattern, string text)
+        {
+            int res = KMPsearch(pattern, text);
+            if (res != -1)
+            {
+                return $"\nFound entrance of ({pattern}) on position ({res})";
+            }
+            return $"\n There is no ({pattern})";
         }
     }
 }
