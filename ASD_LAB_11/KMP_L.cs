@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,44 +10,81 @@ namespace ASD_LAB_11
     class KMP_L
     {
 
-        public static int[] prefixFunction(string pattern)
+        public static int prefixFunction(string pat, int[] pref)
         {
-            int sz = pattern.Length;
-            int[] prefix = new int[sz];
+            int sz = pat.Length;
 
             for (int i = 1; i < sz; ++i)
             {
-                int j = prefix[i - 1];
-                while (j > 0 && pattern[i] != pattern[j])
+                int j = pref[i - 1];
+                while (j > 0 && pat[i] != pat[j])
                 {
-                    j = prefix[j - 1];
+                    j = pref[j - 1];
                 }
-                if (pattern[i] == pattern[j])
+                if (pat[i] == pat[j])
                 {
                     ++j;
                 }
-                prefix[i] = j;
+                pref[i] = j;
             }
 
-            return prefix;
+            foreach(int i in pref)
+            {
+                if (i != 0)
+                    return 1;
+            }
+
+            return 0;
         }
 
-        public static int KMPsearch(string pattern, string text)
+        public static string search(string pat, string txt)
         {
-            int[] prefix = prefixFunction(pattern);
+            string log = "";
+            int[] pref = new int[pat.Length];
+            int resCheck = prefixFunction(pat, pref);
 
-            int M = pattern.Length;
-            int N = text.Length;
+            #region Return value check
+            if (resCheck == 0)
+            {
+                log += "\nLPS array has no sufixes\n";
+            }
+            else
+            {
+                log += "\nLSP Array : \n";
+                foreach (char ch in pat)
+                {
+                    log += $" ({ch}) ";
+                }
+                log += "\n";
+                foreach (int k in pref)
+                {
+                    log += $" ({k}) ";
+                }
+            }
+            #endregion
+
+            string logRes = "";
+
+            int M = pat.Length;
+            int N = txt.Length;
 
             int i = 0, j = 0;
             while (i < N)
-            {
-                if (j > 0 && pattern[j] != text[i + j])
+            {   
+                if(j == M)
                 {
-                    i += j - prefix[j];
+                    logRes += $"\nEntrance of ({pat}) at position ({i})";
+                    i += j;
+                    j = 0;
+                    if (i == N)
+                        break;
+                }
+                if (j > 0 && pat[j] != txt[i + j])
+                {
+                    i += j - pref[j];
                     j = 0;
                 }
-                if (pattern[j] == text[i + j])
+                if (pat[j] == txt[i + j])
                 {
                     j++;
                 }
@@ -54,23 +92,9 @@ namespace ASD_LAB_11
                 {
                     i++;
                 }
-                if (j == M)
-                {
-                    return i;
-                }
             }
 
-            return -1;
-        }
-
-        public static string search(string pattern, string text)
-        {
-            int res = KMPsearch(pattern, text);
-            if (res != -1)
-            {
-                return $"\nFound entrance of ({pattern}) on position ({res})";
-            }
-            return $"\n There is no ({pattern})";
+            return log+logRes;
         }
     }
 }

@@ -19,9 +19,10 @@ namespace ASD_LAB_11
 
         private async void start_Click(object sender, EventArgs e)
         {
+            logOut.Text = "";
             //string[] param = Task14.search(text1.Text);
             //text1.Text = param[0];
-            logOut.Text += $"{KMP_L.search(text1.Text, text2.Text)}";
+            logOut.Text += KMP_L.search(text1.Text, text2.Text);
             //logOut.Text += KMP.KMPSearch(text1.Text, text2.Text);
         }
     }
